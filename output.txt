@@ -1,7 +1,0 @@
-Level 1:Number of errors: 86Avarage speed: 0.5442430252506438Final errors by keys:
-Total number of errors is 86
-Key: 'ą', number of errors: 24
-Key: 'Ă', number of errors: 24
-Key: 'Ą', number of errors: 11
-Key: 'ă', number of errors: 26
-Key: 'r', number of errors: 1
