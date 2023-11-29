@@ -1,11 +1,10 @@
-import curses
-import random
-import time
 from typing import Counter
-import Menu
-import Cursor
-from utils import *
-from utils import the_test_map
+
+from src.utils import get_all_stats
+from src.utils import get_documented
+from src.utils import get_the_lines
+from src.utils import print_the_progress
+from src.utils import the_test_map
 
 
 def main():
