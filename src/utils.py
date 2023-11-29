@@ -1,7 +1,15 @@
+import curses
+import random
+import time
+
+from src.cursor import cursor
+from src.menu import menu
+
 the_test_map = dict()
 another_test_map = dict()
 errors_on_keys = dict()
 extra_error_dict = dict()
+
 
 def do_the_comparation(menu, lines, index_of_lines):
 
@@ -29,8 +37,8 @@ def do_the_comparation(menu, lines, index_of_lines):
         
 
 def draw_menu(stdscr, index_of_lines, lines, breakpointer):
-    menu = Menu(stdscr)
-    cursor = Cursor()
+    menu = menu(stdscr)
+    cursor = cursor()
     starting_time = time.time()
     menu.stdscr.clear()
     menu.stdscr.refresh()
