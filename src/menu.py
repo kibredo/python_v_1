@@ -1,4 +1,7 @@
-class Menu:
+import curses
+
+
+class menu:
     def __init__(self, stdscr):
         self.stdscr = stdscr
     checker = True
