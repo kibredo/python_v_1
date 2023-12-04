@@ -1,10 +1,5 @@
 from typing import Counter
-
-from src.utils import get_all_stats
-from src.utils import get_documented
-from src.utils import get_the_lines
-from src.utils import print_the_progress
-from src.utils import the_test_map
+from src.utils import get_all_stats, get_documented, get_the_lines, print_the_progress, the_test_map
 
 
 def main():
