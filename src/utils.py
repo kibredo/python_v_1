@@ -11,22 +11,22 @@ errors_on_keys = dict()
 extra_error_dict = dict()
 
 
-def do_the_comparation(menu, lines, index_of_lines):
+def do_the_comparation(the_menu, lines, index_of_lines):
 
-    if chr(menu.k) == lines[index_of_lines][menu.index]:
-        menu.some_string += chr(menu.k)
-        menu.index += 1
+    if chr(the_menu.k) == lines[index_of_lines][the_menu.index]:
+        the_menu.some_string += chr(the_menu.k)
+        the_menu.index += 1
 
-        if menu.index == len(lines[index_of_lines]):
-            menu.checker = False
-            menu.was_end_of_string = True
+        if the_menu.index == len(lines[index_of_lines]):
+            the_menu.checker = False
+            the_menu.was_end_of_string = True
 
     else:
         the_test_map["322"] += 1
-        menu.number_of_errors += 1
+        the_menu.number_of_errors += 1
 
-        if menu.k != 0:
-            the_char = chr(menu.k)
+        if the_menu.k != 0:
+            the_char = chr(the_menu.k)
 
             if the_char in extra_error_dict.keys():
                 errors_on_keys[the_char] += 1
@@ -34,66 +34,66 @@ def do_the_comparation(menu, lines, index_of_lines):
             else:
                 errors_on_keys[the_char] = 1
                 extra_error_dict[the_char] = 1
-        
 
-def draw_menu(stdscr, index_of_lines, lines, breakpointer):
-    menu = menu(stdscr)
-    cursor = cursor()
+
+def draw_the_menu(stdscr, index_of_lines, lines, breakpointer):
+    the_menu = menu(stdscr)
+    the_cursor = cursor()
     starting_time = time.time()
-    menu.stdscr.clear()
-    menu.stdscr.refresh()
+    the_menu.stdscr.clear()
+    the_menu.stdscr.refresh()
     curses.start_color()
     curses.init_pair(1, curses.COLOR_CYAN, curses.COLOR_BLACK)
     curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
     curses.init_pair(3, curses.COLOR_BLACK, curses.COLOR_WHITE)
-    while (menu.checker):
-        menu.step_number += 1
+    while (the_menu.checker):
+        the_menu.step_number += 1
 
-        if menu.was_first_letter:
+        if the_menu.was_first_letter:
             starting_time = time.time()
-            menu.was_first_letter = False
+            the_menu.was_first_letter = False
 
-        menu.stdscr.clear()
-        height, width = menu.stdscr.getmaxyx()
-        menu.update_curses(cursor)
-        cursor.update_cursor(width, height)
-        do_the_comparation(menu, lines, index_of_lines)
-        keystr = f"Current Speed = {menu.index / (time.time() - starting_time)}"
+        the_menu.stdscr.clear()
+        height, width = the_menu.stdscr.getmaxyx()
+        the_menu.update_curses(the_cursor)
+        the_cursor.update_cursor(width, height)
+        do_the_comparation(the_menu, lines, index_of_lines)
+        keystr = f"Current Speed = {the_menu.index / (time.time() - starting_time)}"
         title = "TYPE THIS"[:width-1]
         subtitle = lines[index_of_lines]
-        statusbarstr = f"Number of Errors is {menu.number_of_errors}"
+        statusbarstr = f"Number of Errors is {the_menu.number_of_errors}"
 
-        if menu.k == 0:
+        if the_menu.k == 0:
             keystr = "No key press detected..."[:width-1]
 
-        if menu.was_end_of_string:
-            keystr = menu.get_finished(lines, index_of_lines, starting_time, start_y, width, menu.stdscr)
+        if the_menu.was_end_of_string:
+            keystr = the_menu.get_finished(lines, index_of_lines, starting_time, start_y, width, the_menu.stdscr)
 
         start_x_title = int((width // 2) - (len(title) // 2) - len(title) % 2)
         start_x_subtitle = int((width // 2) - (len(subtitle) // 2) - len(subtitle) % 2)
         start_x_keystr = int((width // 2) - (len(keystr) // 2) - len(keystr) % 2)
         start_y = int((height // 2) - 2)
         insert_window_x = int((width// 2) - len(lines[index_of_lines]) // 2 - len(lines[index_of_lines]) % 2)
-        menu.rendering_text(width, height)
-        menu.render_status_bar( height, statusbarstr, width)
-        menu.get_the_title(start_y, start_x_title, title)
-        menu.get_the_rest(start_y, start_x_subtitle, subtitle, insert_window_x, start_x_keystr, keystr, cursor)
-        menu.stdscr.refresh()
-        menu.k = menu.stdscr.getch()
-    the_test_map[index_of_lines] = f"Number of errors: {menu.number_of_errors}"
+        the_menu.rendering_text(width, height)
+        the_menu.render_status_bar( height, statusbarstr, width)
+        the_menu.get_the_title(start_y, start_x_title, title)
+        the_menu.get_the_rest(start_y, start_x_subtitle, subtitle, insert_window_x, start_x_keystr, keystr, cursor)
+        the_menu.stdscr.refresh()
+        the_menu.k = the_menu.stdscr.getch()
+    the_test_map[index_of_lines] = f"Number of errors: {the_menu.number_of_errors}"
     another_test_map[index_of_lines] = f"Avarage speed: {len(lines[index_of_lines]) / (time.time() - starting_time)}"
 
     if index_of_lines < len(lines) - 1:
 
-        if menu.k == 10 or menu.k == 32:
+        if the_menu.k == 10 or the_menu.k == 32:
             return True
-        
+
         return False
     else:
         index_of_lines -= 1
         breakpointer = False
         return False
-    
+
 
 def get_the_lines(string_input):
     file_of_strings = open('strings.txt', 'r')
@@ -107,7 +107,7 @@ def get_the_lines(string_input):
             print("Enter the file name(from current directory):")
             extra_input = input()
             file_of_strings = open(extra_input, 'r')
-            
+
     lines = file_of_strings.read().splitlines()
     random.shuffle(lines)
     file_of_strings.close()
@@ -118,7 +118,7 @@ def print_the_progress(lines, breakpointer, string_input, index_in_lines):
     while string_input != "no":
 
         if string_input == "yes":
-            should_continue = curses.wrapper(draw_menu, index_in_lines, lines, breakpointer)
+            should_continue = curses.wrapper(draw_the_menu, index_in_lines, lines, breakpointer)
 
             if should_continue:
                 string_input = "yes"
@@ -167,4 +167,3 @@ def get_all_stats(ans):
 
     else:
         print("You have no errors!!")
-
