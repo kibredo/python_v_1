@@ -1,5 +1,5 @@
 import curses
-
+import time
 
 class menu:
     def __init__(self, stdscr):
@@ -33,7 +33,7 @@ class menu:
         stdscr.addstr(start_y + 6, int((width// 2) - len(mid_ans_string) // 2 - len(mid_ans_string) % 2), mid_ans_string)
         stdscr.addstr(start_y + 7, int((width// 2) - len(self.ansstring) // 2 - len(self.ansstring) % 2), self.ansstring)
         return keystr
-    
+
     def rendering_text(self, width, height):
         whstr = f"Width: {width}, Height: {height}"
         self.stdscr.addstr(0, 0, whstr, curses.color_pair(1))
